@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'angular-skycons'])
+angular.module('starter', ['ionic'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -50,7 +50,7 @@ angular.module('starter', ['ionic', 'angular-skycons'])
 
     function parseWUData(res) {
       var data = res.data.current_observation;
-
+      console.log("data ", data);
       weather.location = data.display_location.full;
       weather.temp = parseInt(data.temp_f);
       weather.image = data.icon_url;
