@@ -27,7 +27,6 @@ angular.module('starter', ['ionic'])
   var weather = this;
   var apikey = '806bed28cf55c9a1';
   var url = '/api/' + apikey + '/conditions/q/';
-  searchHistory = [];
   
   $http.get(url + 'autoip.json').then(parseWUData);
 
@@ -50,12 +49,17 @@ angular.module('starter', ['ionic'])
           .then(function(res) {
             console.log("res", res);
             // add search to local storage of what you have recently searched for 
-            var history = JSON.parse(localStorage.getItem('searchHistory')) || [];
-            if (history.indexOf(res.data.current_observation.station_id) === -1) {
-              history.push(res.data.current_observation.station_id);
-              localStorage.setItem("searchHistory", JSON.stringify(history));
-            }
-            console.log("searchHistory array ", searchHistory);
+            var history = JSON.parse(localStorage.getItem('searchHistory')) || {};
+            cityNam = res.data.current_observation.display_location.full;
+            id = res.data.current_observation.station_id;
+            history[cityNam] = id;
+
+            // JSON.stringify(history).push
+            // if (history.indexOf(res.data.current_observation.display_location) === -1) {
+            //   history.push(res.data.current_observation.station_id);
+            localStorage.setItem("searchHistory", JSON.stringify(history));
+            // }
+            // console.log("searchHistory array ", searchHistory);
           })
       }
 
