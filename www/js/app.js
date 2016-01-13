@@ -34,6 +34,8 @@ angular.module('starter', ['ionic', 'angular-skycons'])
       console.log(res);
       weather.temp = res.data.currently.temperature;
       weather.icon = res.data.currently.icon;
+      weather.color = "yellow";
+      // background[0].style.backgroundImage="url(http://www.hdwallpapers.in/walls/sunny_day-wide.jpg)";
       console.log("weather icon ", weather.icon);
     });
   });

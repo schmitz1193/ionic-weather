@@ -9727,3 +9727,21 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+  h2 {
+  font-size: 8em;
+  padding-top: 50px;
+  }
+
+.pane {
+/*  background-image: url("http://cmster.com/media/NNsSH72QgKnSjd59XEuUwclrdO81RMYM4Z6gwDw55go7rsLPyQwa5wYukAx39B9T.jpg"); 
+*/  
+  background-color: lightblue;
+  background-size: cover;
+  background-position: 20% 0; }
+
+#container {
+  text-align: center; }
+
+#container > img {
+  width: 50%; }
