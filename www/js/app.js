@@ -50,15 +50,14 @@ angular.module('starter', ['ionic'])
           .then(function(res) {
             console.log("res", res);
             // add search to local storage of what you have recently searched for 
-            // searchHistory.forEach(function(zipHistory) {
-            //   if (zipHistory = res.data.current_observation.stateProvider) {
-            searchHistory.push(res.data.current_observation.station_id);
-            localStorage.setItem("SearchHistory", searchHistory);
-              // }
+            var history = JSON.parse(localStorage.getItem('searchHistory')) || [];
+            if (history.indexOf(res.data.current_observation.station_id) === -1) {
+              history.push(res.data.current_observation.station_id);
+              localStorage.setItem("searchHistory", JSON.stringify(history));
+            }
             console.log("searchHistory array ", searchHistory);
           })
       }
-    // }
 
     function parseWUData(res) {
       var data = res.data.current_observation;
