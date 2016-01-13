@@ -27,6 +27,7 @@ angular.module('starter', ['ionic'])
   var weather = this;
   var apikey = '806bed28cf55c9a1';
   var url = '/api/' + apikey + '/conditions/q/';
+  searchHistory = [];
   
   $http.get(url + 'autoip.json').then(parseWUData);
 
@@ -45,8 +46,19 @@ angular.module('starter', ['ionic'])
     weather.search = function () {
         $http
           .get(url + weather.searchQuery + '.json')
-          .then(parseWUData);
-    }
+          .then(parseWUData)
+          .then(function(res) {
+            console.log("res", res);
+            // add search to local storage of what you have recently searched for 
+            // searchHistory.forEach(function(zipHistory) {
+            //   if (zipHistory = res.data.current_observation.stateProvider) {
+            searchHistory.push(res.data.current_observation.station_id);
+            localStorage.setItem("SearchHistory", searchHistory);
+              // }
+            console.log("searchHistory array ", searchHistory);
+          })
+      }
+    // }
 
     function parseWUData(res) {
       var data = res.data.current_observation;
@@ -54,6 +66,7 @@ angular.module('starter', ['ionic'])
       weather.location = data.display_location.full;
       weather.temp = parseInt(data.temp_f);
       weather.image = data.icon_url;
+      return res;
     }
 
 
