@@ -1,10 +1,12 @@
 {
   "name": "Ionic-Weather",
   "app_id": "",
-  "proxies": [
-  	{
-	  "path": "/api",
-	  "proxyUrl": "https://api.forecast.io"
-	}
+   "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://api.wunderground.com/api"
+    }
   ]
 }
+
+

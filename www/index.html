@@ -26,11 +26,21 @@
   </head>
   <body class="phone" ng-app="starter">
 
-    <ion-pane>
-      <ion-header-bar class="bar-stable">
+    <ion-pane ng-controller="weatherCtrl as weather">
+<!--       <ion-header-bar class="bar-stable">
+
         <h1 class="title">My First Weather App!!!</h1>
       </ion-header-bar>
-      <ion-content ng-controller="weatherCtrl as weather">
+ -->  <ion-header-bar class="bar bar-header item-input-inset">
+        <label class="item-input-wrapper">
+          <i class="icon ion-ios-search placeholder-icon"></i>
+          <input type="search" placeholder="Search" ng-model="weather.searchQuery">
+        </label>
+        <button class="button button-clear" ng-click="weather.search()">
+          Cancel
+        </button>
+      </ion-header-bar>
+      <ion-content>
         <div id="container">
           <h1 class="temp">{{weather.temp}} °F</h1>
             <!-- <img src="http://placehold.it/200x200"> -->

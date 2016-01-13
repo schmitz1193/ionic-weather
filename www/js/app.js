@@ -25,23 +25,38 @@ angular.module('starter', ['ionic', 'angular-skycons'])
 
 .controller('weatherCtrl', function ($http) {
   var weather = this;
+  var apikey = '806bed28cf55c9a1';
+  var url = '/api/' + apikey + '/conditions/q/';
+  
+  $http.get(url + 'autoip.json').then(parseWUData);
+
   navigator.geolocation.getCurrentPosition(function (geopos) {
+    console.log(geopos)
     var lat = geopos.coords.latitude;
     var long = geopos.coords.longitude;
-    var apikey = 'd8036bc7483ba1872e38cbbbe00d38fe';
-    var url = '/api/forecast/' + apikey + '/' + lat + ',' + long;
-    $http.get(url).then (function (res) {
-      console.log(res);
-      weather.temp = res.data.currently.temperature;
-      weather.icon = res.data.currently.icon;
-      weather.color = "yellow";
-      // background[0].style.backgroundImage="url(http://www.hdwallpapers.in/walls/sunny_day-wide.jpg)";
-      console.log("weather icon ", weather.icon);
-    });
-  });
+    console.log(lat, long)
 
-  weather.temp = '--';
-  weather.icon = '';
+    $http.get(url).then(parseWUData);
+      $http
+      .get(url + lat + ',' + long + '.json')
+      .then(parseWUData);
+    });
+
+    weather.search = function () {
+        $http
+          .get(url + weather.searchQuery + '.json')
+          .then(parseWUData);
+    }
+
+    function parseWUData(res) {
+      var data = res.data.current_observation;
+
+      weather.location = data.display_location.full;
+      weather.temp = parseInt(data.temp_f);
+      weather.image = data.icon_url;
+    }
+
+
 });
 
 // .config(function ($stateProvider, $urlRouterProvider) {
