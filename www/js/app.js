@@ -30,6 +30,8 @@ angular.module('starter', ['ionic'])
   
   $http.get(url + 'autoip.json').then(parseWUData);
 
+
+
   navigator.geolocation.getCurrentPosition(function (geopos) {
     console.log(geopos)
     var lat = geopos.coords.latitude;
@@ -53,13 +55,7 @@ angular.module('starter', ['ionic'])
             cityNam = res.data.current_observation.display_location.full;
             id = res.data.current_observation.station_id;
             history[cityNam] = id;
-
-            // JSON.stringify(history).push
-            // if (history.indexOf(res.data.current_observation.display_location) === -1) {
-            //   history.push(res.data.current_observation.station_id);
             localStorage.setItem("searchHistory", JSON.stringify(history));
-            // }
-            // console.log("searchHistory array ", searchHistory);
           })
       }
 
@@ -69,6 +65,20 @@ angular.module('starter', ['ionic'])
       weather.location = data.display_location.full;
       weather.temp = parseInt(data.temp_f);
       weather.image = data.icon_url;
+      city = res.data.current_observation.display_location.city;
+      state = res.data.current_observation.display_location.state;
+      var furl = '/api/' + apikey + '/forecast/q/';  
+        $http.get(furl + state + '/' + city + '.json').then(function(forecast) {
+          console.log("forecast ", forecast);
+          // for (date.weekday_short in forecast.data.forecast.simpleforecast.forecastday) {
+          //   weather.forecastday.push(date.weekday_short);
+          // }
+          // console.log("forecastday ", weather.forecastday);
+          weather.day1 = forecast.data.forecast.simpleforecast.forecastday[0].date.weekday_short;
+          weather.forecast1 = forecast.data.forecast.txt_forecast.forecastday[0].fcttext;
+          weather.high = forecast.data.forecast.simpleforecast.forecastday[0].high.fahrenheit;
+          weather.low = forecast.data.forecast.simpleforecast.forecastday[0].low.fahrenheit;
+        })
       return res;
     }
 

@@ -37,6 +37,12 @@
           <h1>{{weather.location}}</h1>
           <h1>{{weather.temp}}℉</h1>
           <img ng-src="{{weather.image}}">
+          <h2>Today's high:  {{weather.high}}°F</h2>
+          <h2>Today's low:  {{weather.low}}°F</h2>
+          <h4>Five day forecast: <h4>
+          <h4>{{weather.day1}}</h4>
+          <h4>{{weather.forecast1}}</h4>
+          <!-- <div ng-repeat="forecastday in weather.forecast">{{forecastday.date.weekday_short}}</div> -->
       </ion-content>
     </ion-pane>
   </body>
