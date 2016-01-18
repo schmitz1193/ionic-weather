@@ -34,15 +34,21 @@
         </button>
       </ion-header-bar>
       <ion-content>
-          <h1>{{weather.location}}</h1>
-          <h1>{{weather.temp}}℉</h1>
+          <h2>{{weather.location}}</h2>
+          <h2>{{weather.temp}}℉</h2>
           <img ng-src="{{weather.image}}">
-          <h2>Today's high:  {{weather.high}}°F</h2>
-          <h2>Today's low:  {{weather.low}}°F</h2>
+          <h3>Today's high:  {{weather.high}}°F</h3>
+          <h3>Today's low:  {{weather.low}}°F</h3>
           <h4>Five day forecast: <h4>
-          <h4>{{weather.day1}}</h4>
-          <h4>{{weather.forecast1}}</h4>
-          <!-- <div ng-repeat="forecastday in weather.forecast">{{forecastday.date.weekday_short}}</div> -->
+            <div ng-repeat="text in weather.forecast | limitTo: 2">
+              <h4>{{text.title }}</h4>
+              <img ng-src="{{text.icon_url}}"</h4>
+              <h4>{{text.fcttext}}</h4>
+            </div>
+<!--           <div ng-repeat="(key, value) in weather.searches">
+           <h5 class="align-search" ng-click="weather.clickSearch('{{value}}')">{{key}}</h5>
+          </div>
+ -->
       </ion-content>
     </ion-pane>
   </body>
