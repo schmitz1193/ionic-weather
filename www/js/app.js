@@ -53,6 +53,12 @@ angular.module('starter', ['ionic'])
             id = res.data.current_observation.station_id;
             history[cityNam] = id;
             localStorage.setItem("searchHistory", JSON.stringify(history));
+            // **** originally stored array in local storage..this is that code: *****
+            // var historyArray = JSON.parse(localStorage.getItem('searchHistoryArray')) || [];
+            // if (historyArray.indexOf(res.data.current_observation.station_id) === -1) {
+            //  historyArray.push(res.data.current_observation.station_id);
+            //  localStorage.setItem('searchHistoryArray', JSON.stringify(historyArray));
+            // ***********************************************************************
           })
       }
 
