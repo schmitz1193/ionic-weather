@@ -40,7 +40,7 @@
           <h3>Today's high:  {{weather.high}}°F</h3>
           <h3>Today's low:  {{weather.low}}°F</h3>
           <h4>Five day forecast: <h4>
-            <div ng-repeat="text in weather.forecast | limitTo: 2">
+            <div ng-repeat="text in weather.forecast | limitTo: 12">
               <h4>{{text.title }}</h4>
               <img ng-src="{{text.icon_url}}"</h4>
               <h4>{{text.fcttext}}</h4>
